@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter une réservation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ... VOTRE STYLE FOURNI ... */
+    :root {
+      --marine-blue: #0a1833;
+      --marine-blue-light: #162447;
+      --marine-blue-dark: #091224;
+      --accent: #2563eb;
+      --sidebar-bg: linear-gradient(135deg, #0a1833 80%, #181b20 100%);
+      --sidebar-hover: #2563eb;
+      --sidebar-active: #2563eb;
+      --sidebar-icon-bg: #2563eb;
+      --sidebar-icon-color: #fff;
+      --main-bg: #181b20;
+      --content-bg: #101624;
+      --text: #fff;
+      --text-muted: #b0b8c9;
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --danger: #dc2626;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--main-bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+
+    .form-container {
+      background: var(--content-bg);
+      width: 900px;
+      max-width: 95vw;
+      padding: 2.5rem;
+      border-radius: 22px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 2px 10px rgba(0,0,0,0.1);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      backdrop-filter: blur(20px);
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      color: var(--text);
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      padding-bottom: 12px;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .form-group {
+      flex: 1 1 calc(50% - 1.5rem);
+      min-width: 250px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.7rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      margin-top: 1.5rem;
+      gap: 1rem;
+    }
+
+    .btn {
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: white;
+      flex: 1;
+      box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-submit:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .form-group { flex: 1 1 100%; }
+      .form-actions { flex-direction: column; }
+      body { padding: 1rem; }
+      .form-container { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2><i class="fas fa-calendar-plus"></i> Ajouter une réservation</h2>
+<form method="POST">
+    <div class="form-group">
+        <label>Email du client</label>
+        <input type="email" name="client_email" required class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Immatriculation de la voiture</label>
+        <input list="immatriculations" name="immatriculation" required class="form-control">
+        <datalist id="immatriculations">
+            {% for immat in immatriculations %}
+            <option value="{{ immat }}">
+            {% endfor %}
+        </datalist>
+    </div>
+    
+    <div class="form-group">
+        <label>Date de début</label>
+        <input type="datetime-local" name="date_debut" required class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Date de fin</label>
+        <input type="datetime-local" name="date_fin" required class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Statut</label>
+        <select name="statut" class="form-control">
+            <option value="en attente">En attente</option>
+            <option value="confirmée">Confirmée</option>
+            <option value="annulée">Annulée</option>
+        </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Ajouter la réservation</button>
+</form>
+  </div>
+</body>
+</html>

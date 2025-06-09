@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAR RENTAL - Connexion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            min-height: 100vh;
+            min-width: 100vw;
+            /* Photo de voiture libre de droits */
+            background: url('https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(30, 27, 75, 0.75);
+            z-index: 0;
+        }
+        .login-container {
+            position: relative;
+            z-index: 1;
+            background: rgba(30, 27, 75, 0.75);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            width: 100%;
+            max-width: 430px;
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .login-header h2 {
+            color: #4b1cd6;
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .login-header h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #4b1cd6;
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+        .login-header p {
+            color: #6b7280;
+            margin-top: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.3rem;
+            position: relative;
+            width: 100%;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.9rem 0.9rem 0.9rem 2.7rem;
+            border: none;
+            background: #f3f3f4;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #222;
+            outline: none;
+            box-sizing: border-box;
+        }
+        .form-group i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a1a1aa;
+            font-size: 1.1rem;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: #4b1cd6;
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #2e1065;
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 1.2rem;
+        }
+        .login-footer a {
+            color: #4b1cd6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .alert {
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-size: 1rem;
+        }
+        .alert-danger { background: #fee2e2; color: #b91c1c; }
+        .alert-success { background: #dcfce7; color: #166534; }
+        @media (max-width: 600px) {
+            .login-container { padding: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h2>Connexion</h2>
+            <p>Connectez-vous à votre compte</p>
+        </div>
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            </div>
+            <button type="submit" class="login-btn">Se connecter</button>
+        </form>
+        <div class="login-footer">
+            <a href="#">Mot de passe oublié ?</a>
+        </div>
+    </div>
+</body>
+</html>

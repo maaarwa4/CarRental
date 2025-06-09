@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestion Réservations</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+
+<div class="flex min-h-screen">
+
+  <!-- Sidebar -->
+  <aside class="w-64 bg-white shadow-md flex flex-col justify-between">
+    <div>
+      <div class="p-6 text-center border-b">
+        <h2 class="text-2xl font-bold text-blue-600">CarRent Manager</h2>
+      </div>
+      <nav class="flex flex-col p-6 space-y-6">
+        <a href="/clients" class="block text-gray-700 hover:text-blue-600 font-medium">Gestion Clients</a>
+        <a href="/annonces" class="block text-gray-700 hover:text-blue-600 font-medium">Gestion Annonces</a>
+        <a href="/manager" class="block text-blue-600 font-semibold">Gestion Réservations</a>
+      </nav>
+    </div>
+    <div class="p-6 border-t">
+      <a href="/logout" class="block text-red-500 font-medium hover:underline">Déconnexion</a>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Réservations en attente</h1>
+
+    {% if reservations %}
+    <div class="overflow-x-auto bg-white rounded shadow">
+      <table class="min-w-full text-sm text-left">
+        <thead class="bg-gray-200 text-gray-600 uppercase text-xs">
+          <tr>
+            <th class="px-6 py-3">Client</th>
+            <th class="px-6 py-3">Voiture</th>
+            <th class="px-6 py-3">Dates</th>
+            <th class="px-6 py-3">Statut</th>
+            <th class="px-6 py-3">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          {% for resa in reservations %}
+          <tr class="border-t">
+            <td class="px-6 py-4">{{ resa.client_nom }}</td>
+            <td class="px-6 py-4">{{ resa.voiture_modele }}</td>
+            <td class="px-6 py-4">
+              {{ resa.date_debut.strftime('%d/%m/%Y') }} → {{ resa.date_fin.strftime('%d/%m/%Y') }}
+            </td>
+            <td class="px-6 py-4">
+              <span class="px-2 py-1 rounded-full text-xs font-semibold
+                {% if resa.statut == 'confirmée' %} bg-green-100 text-green-800
+                {% elif resa.statut == 'refusée' %} bg-red-100 text-red-800
+                {% elif resa.statut == 'terminée' %} bg-purple-100 text-purple-800
+                {% else %} bg-yellow-100 text-yellow-800 {% endif %}">
+                {{ resa.statut }}
+              </span>
+            </td>
+            <td class="px-6 py-4">
+              <form action="/manager/reservation/{{ resa._id }}/action" method="post" class="inline">
+                <button name="action" value="accept" class="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 text-xs mr-2">
+                  Accepter
+                </button>
+                <button name="action" value="refuse" class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 text-xs">
+                  Refuser
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+      <p class="text-gray-600 mt-4">Aucune réservation en attente.</p>
+    {% endif %}
+  </main>
+</div>
+
+</body>
+</html>

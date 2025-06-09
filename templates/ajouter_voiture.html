@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajouter une voiture - CARRENTAL</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --marine-blue: #0a1833;
+      --accent: #2563eb;
+      --text: #fff;
+      --text-muted: #b0b8c9;
+      --content-bg: #101624;
+      --input-bg: rgba(255, 255, 255, 0.05);
+      --input-border: rgba(255, 255, 255, 0.1);
+      --shadow: rgba(0, 0, 0, 0.3);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--marine-blue);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .form-container {
+      background: var(--content-bg);
+      width: 900px;
+      max-width: 95vw;
+      padding: 2.5rem;
+      border-radius: 22px;
+      box-shadow: 0 12px 40px var(--shadow);
+      animation: fadeIn 0.7s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      background: linear-gradient(135deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .form-group {
+      flex: 1 1 calc(50% - 1.5rem);
+      min-width: 250px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 12px;
+      color: var(--text);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .form-group.full-width {
+      flex: 1 1 100%;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .btn-cancel {
+  background-color: rgba(255, 0, 60, 0.1);
+  color: #fda4af;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  transition: background 0.3s ease, transform 0.2s;
+  border: none;
+}
+
+.btn-cancel:hover {
+  background-color: rgba(255, 0, 60, 0.2);
+  color: #f87171;
+  transform: translateY(-2px);
+}
+
+.btn-submit {
+  background: #2563eb;
+  color: #fff;
+  padding: 0.9rem 2rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  border: none;
+  transition: background 0.3s ease, transform 0.2s, box-shadow 0.3s;
+  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
+}
+
+.btn-submit:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(37, 99, 235, 0.6);
+}
+
+
+    .custom-file-upload {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      border: 2px dashed rgba(37, 99, 235, 0.4);
+      border-radius: 12px;
+      background: rgba(37, 99, 235, 0.05);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .custom-file-upload:hover {
+      border-color: var(--accent);
+      background: rgba(37, 99, 235, 0.1);
+    }
+
+    .custom-file-upload i {
+      font-size: 2rem;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .form-actions {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .btn-submit:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .form-group {
+        flex: 1 1 100%;
+      }
+      .form-actions {
+                flex-direction: column;
+            }
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2><i class="fas fa-car-side"></i> Ajouter une voiture</h2>
+    <form method="POST" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="marque"><i class="fas fa-tag"></i> Marque</label>
+        <input type="text" id="marque" name="marque" placeholder="Ex: Renault" required>
+      </div>
+
+      <div class="form-group">
+        <label for="modele"><i class="fas fa-car"></i> Modèle</label>
+        <input type="text" id="modele" name="modele" placeholder="Ex: Clio" required>
+      </div>
+
+      <div class="form-group">
+        <label for="immatriculation"><i class="fas fa-id-card"></i> Immatriculation</label>
+        <input type="text" id="immatriculation" name="immatriculation" placeholder="Ex: AB-123-CD" required>
+      </div>
+
+      <div class="form-group">
+        <label for="prix_journalier"><i class="fas fa-euro-sign"></i> Prix journalier (€)</label>
+        <input type="number" id="prix_journalier" name="prix_journalier" step="0.01" min="0" placeholder="Ex: 45.99" required>
+      </div>
+
+      <div class="form-group">
+        <label for="ville"><i class="fas fa-map-marker-alt"></i> Ville</label>
+        <input type="text" id="ville" name="ville" placeholder="Ex: Paris" required>
+      </div>
+
+      <div class="form-group">
+        <label for="disponible"><i class="fas fa-check-circle"></i> Disponible</label>
+        <select id="disponible" name="disponible" required>
+          <option value="oui">Oui</option>
+          <option value="non">Non</option>
+        </select>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="caracteristiques"><i class="fas fa-list"></i> Caractéristiques</label>
+        <textarea id="caracteristiques" name="caracteristiques" placeholder="Climatisation, GPS, Bluetooth..."></textarea>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="image"><i class="fas fa-camera"></i> Image de la voiture</label>
+        <label for="image" class="custom-file-upload">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <span>Choisir une image</span>
+          <input type="file" id="image" name="image" accept="image/*">
+        </label>
+      </div>
+
+      <div class="form-actions">
+                <a href="{{ url_for('manager_voitures') }}" class="btn btn-cancel">
+                    <i class="fas fa-times"></i> Annuler
+                </a>
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-save"></i> Enregistrer
+                </button>
+            </div>
+  </div>
+</body>
+</html>
