@@ -46,6 +46,7 @@ L'application repose sur une **gestion des accès par rôle** : chaque utilisate
 - Mots de passe **hachés avec bcrypt**
 - Sessions Flask et **contrôle d'accès par rôle** sur chaque route
 - Upload d'images sécurisé (`secure_filename`)
+- Configuration sensible externalisée dans des variables d'environnement
 
 ---
 
@@ -67,6 +68,8 @@ L'application repose sur une **gestion des accès par rôle** : chaque utilisate
 CarRental/
 ├── app.py            # Application Flask : routes et logique métier
 ├── crypt.py          # Script de création du compte administrateur
+├── requirements.txt  # Dépendances Python
+├── .env.example      # Modèle de configuration
 ├── templates/        # Vues Jinja2 (tableaux de bord, formulaires, listes)
 └── static/
     ├── images/       # Ressources visuelles
@@ -85,19 +88,19 @@ git clone https://github.com/maaarwa4/CarRental.git
 cd CarRental
 
 # 2. Installer les dépendances
-pip install flask pymongo bcrypt flask-mail
+pip install -r requirements.txt
 
-# 3. Créer le compte administrateur
-#    (modifier l'e-mail et le mot de passe dans crypt.py avant de l'exécuter)
+# 3. Configurer l'environnement
+cp .env.example .env    # puis renseigner les valeurs
+
+# 4. Créer le compte administrateur
 python crypt.py
 
-# 4. Lancer l'application
+# 5. Lancer l'application
 python app.py
 ```
 
-L'application est accessible sur **http://127.0.0.1:5000**
-
-> ⚠️ Pour l'envoi d'e-mails, renseigner `MAIL_USERNAME` et `MAIL_PASSWORD` dans `app.py` (mot de passe d'application Gmail).
+> 🔒 Les informations sensibles (clé secrète, identifiants) sont lues depuis le fichier `.env`, qui n'est jamais versionné.
 
 ---
 

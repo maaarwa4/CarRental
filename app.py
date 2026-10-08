@@ -7,30 +7,32 @@ from werkzeug.utils import secure_filename
 import os
 from bson import ObjectId
 from flask_mail import Mail, Message
-from werkzeug.security import generate_password_hash, check_password_hash
-from datetime import datetime, timedelta  # Ajoutez timedelta ici
+from datetime import datetime, timedelta
 import re
+from dotenv import load_dotenv
 
-
-
+# Chargement de la configuration depuis le fichier .env
+load_dotenv()
 
 app = Flask(__name__)
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-app.config['MAIL_USERNAME'] = 'votre.email@gmail.com'
-app.config['MAIL_PASSWORD'] = 'votre_mot_de_passe'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 mail = Mail(app)
 
-app.secret_key = 'secret_key'
+app.secret_key = os.getenv('SECRET_KEY')
+if not app.secret_key:
+    raise RuntimeError("SECRET_KEY manquante : renseignez-la dans le fichier .env")
 
-UPLOAD_FOLDER = 'BD/static/uploads'  # Dossier pour sauvegarder les images
+# Dossier de sauvegarde des images, résolu par rapport à l'application
+UPLOAD_FOLDER = os.path.join(app.root_path, 'static', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
-
-
 # Connexion MongoDB
-client = MongoClient("mongodb://localhost:27017/")
+client = MongoClient(os.getenv('MONGO_URI', 'mongodb://localhost:27017/'))
 db = client.voiture_db
 users_collection = db['users']
 managers_collection = db['managers']
@@ -222,7 +224,7 @@ def edit_manager(manager_id):
                 flash('Les mots de passe ne correspondent pas', 'error')
                 return redirect(url_for('edit_manager', manager_id=manager_id))
             
-            update_data['password'] = generate_password_hash(password)
+            update_data['password'] = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         try:
             # Mise à jour dans la base de données
