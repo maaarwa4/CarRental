@@ -1,5 +1,5 @@
 <a href="https://github.com/maaarwa4">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:10B981,50:0EA5E9,100:4F46E5&height=190&section=header&text=CarRental&fontSize=56&fontColor=ffffff&fontAlignY=36&desc=Car%20rental%20agency%20management%20platform&descSize=16&descAlignY=60&animation=fadeIn" alt="CarRental" />
+  <img width="100%" src="assets/banner.svg" alt="CarRental" />
 </a>
 
 <div align="center">
@@ -126,5 +126,5 @@ Built by **Marwa Bounoua**
 </div>
 
 <a href="https://github.com/maaarwa4">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:10B981,50:0EA5E9,100:4F46E5&height=100&section=footer" alt="" />
+  <img width="100%" src="assets/footer.svg" alt="" />
 </a>

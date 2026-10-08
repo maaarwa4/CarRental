@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/><stop offset="55%" stop-color="#0EA5E9"/><stop offset="100%" stop-color="#4F46E5"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="85%" cy="15%" r="60%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.22"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip"><rect width="1200" height="300" rx="18"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+  <rect width="1200" height="300" fill="url(#bg)"/>
+  <rect width="1200" height="300" fill="url(#glow)"/>
+  <circle cx="1080" cy="60" r="120" fill="#ffffff" fill-opacity="0.06"/>
+  <circle cx="140" cy="290" r="160" fill="#ffffff" fill-opacity="0.05"/>
+  <path d="M0 250 C 240 210, 420 290, 640 250 S 1000 210, 1200 245 L1200 300 L0 300 Z" fill="#ffffff" fill-opacity="0.10"/>
+  </g>
+  <text x="600" y="128" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="62" font-weight="700" fill="#ffffff" letter-spacing="1">CarRental</text>
+  <text x="600" y="178" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="26" font-weight="600" fill="#ffffff" fill-opacity="0.95">Car rental agency management platform</text>
+  <text x="600" y="218" text-anchor="middle" font-family="'Segoe UI', 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="19" fill="#ffffff" fill-opacity="0.85">Python  ·  Flask  ·  MongoDB</text>
+</svg>
