@@ -1,110 +1,130 @@
+<a href="https://github.com/maaarwa4">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:10B981,50:0EA5E9,100:4F46E5&height=190&section=header&text=CarRental&fontSize=56&fontColor=ffffff&fontAlignY=36&desc=Car%20rental%20agency%20management%20platform&descSize=16&descAlignY=60&animation=fadeIn" alt="CarRental" />
+</a>
+
 <div align="center">
 
-# 🚗 CarRental
-
-**Application web de gestion de location de voitures**
-
-`Python` · `Flask` · `MongoDB` · `Jinja2` · `bcrypt`
+<a href="https://www.python.org"><img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python" /></a>
+<a href="https://flask.palletsprojects.com"><img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white" alt="Flask" /></a>
+<a href="https://www.mongodb.com"><img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" /></a>
+<a href="https://jinja.palletsprojects.com"><img src="https://img.shields.io/badge/Jinja2-B41717?style=for-the-badge&logo=jinja&logoColor=white" alt="Jinja2" /></a>
 
 </div>
 
----
+<br>
 
-## 📌 Présentation
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Light%20Bulb.png" width="32" align="center" />&nbsp; Overview</h2>
 
-CarRental centralise la gestion d'une agence de location de voitures : parc automobile, clients et réservations.
-L'application repose sur une **gestion des accès par rôle** : chaque utilisateur ne voit que les fonctionnalités qui le concernent.
+CarRental centralizes the operations of a car rental agency: **fleet**, **customers** and **bookings**.
+The application relies on **role-based access control**: each user only sees the features relevant to their role.
 
----
+<br>
 
-## 👥 Rôles et fonctionnalités
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Gear.png" width="32" align="center" />&nbsp; Features by Role</h2>
 
-### 🛡️ Administrateur
-- Tableau de bord avec indicateurs clés (nombre de gestionnaires, de clients…)
-- Création, modification et suppression des comptes **gestionnaires**
+<table>
+<tr>
+<td width="50%" valign="top">
 
-### 🧑‍💼 Gestionnaire
-- **Parc automobile** : ajout, modification et suppression de véhicules (avec photo)
-- **Clients** : gestion de son portefeuille clients
-- **Réservations** : création, modification, acceptation ou refus
-- Tableau de bord personnel
+**Administrator**
 
----
+- Dashboard with key indicators (managers, customers…)
+- Create, update and delete **manager accounts**
 
-## ⚙️ Règles métier
+</td>
+<td width="50%" valign="top">
 
-- ✅ Une réservation n'est possible que sur un véhicule **disponible**
-- 📅 Contrôle des **chevauchements de dates** : un véhicule ne peut pas être réservé deux fois sur la même période
-- 🔄 Cycle de vie des réservations : **en attente → confirmée / annulée**
-- 🚘 Disponibilité du véhicule mise à jour automatiquement à chaque réservation
-- 📧 Unicité des adresses e-mail des utilisateurs
+**Manager**
 
----
+- **Fleet**: add, edit and remove vehicles (with photos)
+- **Customers**: manage their own customer portfolio
+- **Bookings**: create, edit, accept or decline
+- Personal dashboard
 
-## 🔐 Sécurité
+</td>
+</tr>
+</table>
 
-- Mots de passe **hachés avec bcrypt**
-- Sessions Flask et **contrôle d'accès par rôle** sur chaque route
-- Upload d'images sécurisé (`secure_filename`)
-- Configuration sensible externalisée dans des variables d'environnement
+<br>
 
----
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Briefcase.png" width="32" align="center" />&nbsp; Business Rules</h2>
 
-## 🛠️ Stack technique
+- A booking can only be made on an **available** vehicle
+- **Overlap control**: a vehicle cannot be booked twice for the same period
+- Booking lifecycle: **pending → confirmed / cancelled**
+- Vehicle availability is **updated automatically** with each booking
+- User email addresses are **unique**
 
-| Couche | Technologie |
-|---|---|
-| Backend | Python, Flask |
-| Base de données | MongoDB (PyMongo) |
-| Frontend | Templates Jinja2, HTML, CSS |
-| Sécurité | bcrypt, Werkzeug |
+```
+PENDING  ──►  CONFIRMED
+   │
+   └──────►  CANCELLED
+```
+
+<br>
+
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Laptop.png" width="32" align="center" />&nbsp; Security & Tech Stack</h2>
+
+- Passwords **hashed with bcrypt**
+- Flask sessions with **role checks on every route**
+- Secure image uploads (`secure_filename`)
+- Sensitive configuration kept in **environment variables**
+
+| Layer | Technology |
+|:---|:---|
+| Backend | Python · Flask |
+| Database | MongoDB (PyMongo) |
+| Frontend | Jinja2 templates · HTML · CSS |
+| Security | bcrypt · Werkzeug |
 | Notifications | Flask-Mail |
-
----
-
-## 📁 Structure du projet
 
 ```
 CarRental/
-├── app.py            # Application Flask : routes et logique métier
-├── crypt.py          # Script de création du compte administrateur
-├── requirements.txt  # Dépendances Python
-├── .env.example      # Modèle de configuration
-├── templates/        # Vues Jinja2 (tableaux de bord, formulaires, listes)
+├── app.py            # Flask application: routes and business logic
+├── crypt.py          # Admin account creation script
+├── requirements.txt  # Python dependencies
+├── .env.example      # Configuration template
+├── templates/        # Jinja2 views (dashboards, forms, lists)
 └── static/
-    ├── images/       # Ressources visuelles
-    └── uploads/      # Photos des véhicules
+    ├── images/       # Visual assets
+    └── uploads/      # Vehicle photos
 ```
 
----
+<br>
 
-## 🚀 Installation
+<h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Objects/Hammer%20and%20Wrench.png" width="32" align="center" />&nbsp; Getting Started</h2>
 
-**Prérequis :** Python 3.8+ et MongoDB lancé en local (`mongodb://localhost:27017`)
+**Prerequisites:** Python 3.8+ and a local MongoDB instance (`mongodb://localhost:27017`)
 
 ```bash
-# 1. Cloner le dépôt
+# 1. Clone the repository
 git clone https://github.com/maaarwa4/CarRental.git
 cd CarRental
 
-# 2. Installer les dépendances
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Configurer l'environnement
-cp .env.example .env    # puis renseigner les valeurs
+# 3. Configure the environment
+cp .env.example .env    # then fill in the values
 
-# 4. Créer le compte administrateur
+# 4. Create the admin account
 python crypt.py
 
-# 5. Lancer l'application
+# 5. Run the app
 python app.py
 ```
 
-
----
+<br>
 
 <div align="center">
 
-Réalisé par **Marwa BOUNOUA** · [LinkedIn](https://linkedin.com/in/marwa-bounoua-877300263) · [GitHub](https://github.com/maaarwa4)
+Built by **Marwa Bounoua**
+
+<a href="https://linkedin.com/in/marwa-bounoua-877300263"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+<a href="https://github.com/maaarwa4"><img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
 
 </div>
+
+<a href="https://github.com/maaarwa4">
+  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:10B981,50:0EA5E9,100:4F46E5&height=100&section=footer" alt="" />
+</a>
