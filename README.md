@@ -100,7 +100,6 @@ python crypt.py
 python app.py
 ```
 
-> 🔒 Les informations sensibles (clé secrète, identifiants) sont lues depuis le fichier `.env`, qui n'est jamais versionné.
 
 ---
 
